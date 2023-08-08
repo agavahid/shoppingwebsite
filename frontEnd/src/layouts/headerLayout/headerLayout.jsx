@@ -40,7 +40,6 @@ export default function HeaderLayout(){
         setIsActive(!isActive)
     }
     function activityMobile(){
-        setIsActive(!isActive)
         setLeftMenu(false)
         setRightMenu(false)
         document.body.style.overflow = 'auto';

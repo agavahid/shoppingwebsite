@@ -16,10 +16,11 @@ export default function MainLayout({children}) {
 
         const userToken = cookies.get('userToken');
         const adminToken = cookies.get('adminToken');
-        if(userToken !== undefined || adminToken !== undefined){
+        if(userToken !== undefined){
             dispatch(setLogin())
+        }else if(adminToken !== undefined){
             dispatch(setAdminLogIn())
-        }  
+        }
        
     },[])
     return(
