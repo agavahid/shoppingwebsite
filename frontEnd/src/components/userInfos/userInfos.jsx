@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import DeleteItem from "../modals/deleteItem/deleteItem";
 import ChangeItem from "../modals/changeItem/changeItem"
+import { baseApi } from "../../configs/configs";
 
 
 export default function UserInfos(){
@@ -30,7 +31,7 @@ export default function UserInfos(){
     function getPageItems(){
         axios({
             method: 'GET',
-            url: `http://localhost:8088/azclassics/users`
+            url: `${baseApi}/azclassics/users`
         })
         .then(response => {
             setPageItems(response.data)

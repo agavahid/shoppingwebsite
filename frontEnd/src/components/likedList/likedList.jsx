@@ -7,6 +7,7 @@ import axios from 'axios';
 import React from 'react';
 import Cookies  from 'universal-cookie';
 import arrowToBottom from '../../assets/icons/cardIcons/arrowToBottom.jpg';
+import { baseApi } from '../../configs/configs';
 
 
 export default function LikedList(){
@@ -21,7 +22,7 @@ export default function LikedList(){
     useEffect(()=>{
         axios({
             method: 'get',
-            url: 'http://localhost:8088/login/shoppingcart',
+            url: `${baseApi}/login/shoppingcart`,
             headers: {
                 "Authorization" : `Bearer ${cookies.get('userToken')}`
             }
@@ -35,7 +36,7 @@ export default function LikedList(){
         
         axios({
             method: 'delete',
-            url: 'http://localhost:8088/login/shoppingcart',
+            url: `${baseApi}/login/shoppingcart`,
             data: {
                 itemid: id
             },

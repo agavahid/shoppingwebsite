@@ -2,6 +2,7 @@ import React from "react";
 import './deleteItem.css';
 import { useState } from "react";
 import axios from "axios";
+import { baseApi } from "../../../configs/configs";
 
 
 export default function DeleteItem({url,id, isRender}) {
@@ -18,7 +19,7 @@ export default function DeleteItem({url,id, isRender}) {
     }
     function deleteChoosed(e){
       axios({
-        url: `http://localhost:8088/azclassics/${url}/${id}`,
+        url: `${baseApi}/azclassics/${url}/${id}`,
         method: 'DELETE'
       })
       .then(response => {

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Genres from '../../components/genres/genres';
 import './headerLayout.css';
 import { Link } from 'react-router-dom';
@@ -20,8 +20,11 @@ export default function HeaderLayout(){
     const [isActive, setIsActive] = useState(false);
     const [leftMenu, setLeftMenu] = useState(false);
     const [rightMenu, setRightMenu] = useState(false);
-    
+    const [isLeftDrpActive, setLeftDrpActive] = useState(false);
 
+    function setLeftDrpDownMenu(){
+        setLeftDrpActive(!isLeftDrpActive)
+    }
     function logOutFunc(e){
         e.stopPropagation()
         cookies.remove('userToken');
@@ -36,8 +39,12 @@ export default function HeaderLayout(){
         activity()
         setRightMenu(false)
     }
-    function activity(){
+    function activity(e){
+        e.stopPropagation()
         setIsActive(!isActive)
+        if(isLeftDrpActive === true){
+            setLeftDrpActive(false)
+        }
     }
     function activityMobile(){
         setLeftMenu(false)
@@ -52,7 +59,7 @@ export default function HeaderLayout(){
             document.body.style.overflow = 'hidden';
         }
     }
-    function setContentsMenuRight(){
+    function setContentsMenuRight(e){
         setRightMenu(!rightMenu)
         if(rightMenu === true){
             document.body.style.overflow = 'auto';
@@ -60,6 +67,15 @@ export default function HeaderLayout(){
             document.body.style.overflow = 'hidden';
         }
     }
+    function closeMenu(){
+        if(isActive === true){
+            setIsActive(false)
+        }
+    }
+    
+    document.addEventListener("click", closeMenu)
+    
+
     return( 
         <header>
             <nav className='navbar'>
@@ -79,7 +95,13 @@ export default function HeaderLayout(){
                                         <Link to={'/'} onClick={()=> activityMobile()}>
                                             <img src='https://icon2.cleanpng.com/20180412/vxe/kisspng-ibooks-computer-icons-desktop-wallpaper-ios-7-book-5acf9f2135f831.8549188515235561292211.jpg' className='mainLogo'/>    
                                         </Link>
-                                        <Genres buttonClick={activityMobile}/>
+                                        <Genres 
+                                            buttonClick={activityMobile} 
+                                            rightMenuActivity={isActive} 
+                                            setrightMenuActivity={setIsActive} 
+                                            isleftDrpMenuActive={setLeftDrpDownMenu}    
+                                            isLeftDrpActive={isLeftDrpActive}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -91,17 +113,17 @@ export default function HeaderLayout(){
                             isAdminLoggedIn === true ?
                                 
                                 <div className="rightContents">
-                                    <div className="rightMobileMenuIcon" onClick={(e)=> setContentsMenuRight()}>
+                                    <div className="rightMobileMenuIcon" onClick={(e)=> setContentsMenuRight(e)}>
                                         <img src={rightMobileIcon}/>
                                     </div>
                                     <div className={rightMenu === false ? "rightContentShadow" : "rightContentShadow active"}></div>
                                     <div className={rightMenu === false ? "rightContentsMenu" : "rightContentsMenu active" }>
                                         <div className={rightMenu === false ? "rightContentsMenuTop" : "rightContentsMenuTop active"}>
-                                            <img src={closeIcon} onClick={()=> setContentsMenuRight()}/>
+                                            <img src={closeIcon} onClick={(e)=> setContentsMenuRight(e)}/>
                                         </div>
                                         <div className={rightMenu === false ? "rightContentsMenuBottom" : "rightContentsMenuBottom active"}>
                                             <div className="rightContentsUser">
-                                                <div className="rightContentsUserHeader" onClick={()=> activity()}>
+                                                <div className="rightContentsUserHeader" onClick={(e)=> activity(e)}>
                                                     <h3>Admin Items</h3>
                                                 </div>
                                                 
@@ -119,20 +141,20 @@ export default function HeaderLayout(){
                             isLoggedIn === false ? 
                             
                             <div className="rightContents">
-                                <div className="rightMobileMenuIcon" onClick={(e)=> setContentsMenuRight()}>
+                                <div className="rightMobileMenuIcon" onClick={(e)=> setContentsMenuRight(e)}>
                                     <img src={rightMobileIcon}/>
                                 </div>
                                 <div className={rightMenu === false ? "rightContentShadow" : "rightContentShadow active"}></div>
                                 <div  className={rightMenu === false ? "rightContentsMenu" : "rightContentsMenu active" }>
                                     <div className={rightMenu === false ? "rightContentsMenuTop" : "rightContentsMenuTop active"}>
-                                        <img src={closeIcon} onClick={()=> setContentsMenuRight()}/>
+                                        <img src={closeIcon} onClick={(e)=> setContentsMenuRight(e)}/>
                                     </div>
                                     <div className={rightMenu === false ? "rightContentsMenuBottom" : "rightContentsMenuBottom active"}>
                                         <Link to={'/login'} onClick={()=> activityMobile()}>
                                             <img className="toCartItem"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz0Ohchf7vyTf4psg8TZJP_45drCu6fjUCQw&usqp=CAU"/>
                                         </Link>
                                         <div className="rightContentsUser">
-                                            <div className="rightContentsUserHeader" onClick={()=> activity()}>
+                                            <div className="rightContentsUserHeader" onClick={(e)=> activity(e)}>
                                                 <h3>User Profile</h3>
                                             </div>
                                             
@@ -148,20 +170,20 @@ export default function HeaderLayout(){
                             </div>
                             :  
                             <div className="rightContents">
-                                <div className="rightMobileMenuIcon" onClick={(e)=> setContentsMenuRight()}>
+                                <div className="rightMobileMenuIcon" onClick={(e)=> setContentsMenuRight(e)}>
                                     <img src={rightMobileIcon}/>
                                 </div>
                                 <div className={rightMenu === false ? "rightContentShadow" : "rightContentShadow active"}></div>
                                 <div className={rightMenu === false ? "rightContentsMenu" : "rightContentsMenu active" }>
                                     <div className={rightMenu === false ? "rightContentsMenuTop" : "rightContentsMenuTop active"}>
-                                        <img src={closeIcon} onClick={()=> setContentsMenuRight()}/>
+                                        <img src={closeIcon} onClick={(e)=> setContentsMenuRight(e)}/>
                                     </div>
                                     <div className={rightMenu === false ? "rightContentsMenuBottom" : "rightContentsMenuBottom active"}>
                                         <Link to={'/profile/likedList'} onClick={()=> activityMobile()}>
                                             <img className="toCartItem" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz0Ohchf7vyTf4psg8TZJP_45drCu6fjUCQw&usqp=CAU"/>
                                         </Link>
                                         <div className="rightContentsUser">
-                                            <div className="rightContentsUserHeader"  onClick={()=> activity()}>
+                                            <div className="rightContentsUserHeader"  onClick={(e)=> activity(e)}>
                                                 <h3>User Profile</h3>
                                             </div>
                                             <div className={isActive === false ? "userProfileCaret" : "userProfileCaret active"}></div>

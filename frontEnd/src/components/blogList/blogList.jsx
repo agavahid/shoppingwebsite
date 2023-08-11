@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import DeleteItem from "../modals/deleteItem/deleteItem";
 import ChangeItem from "../modals/changeItem/changeItem";
 import AddItem from "../modals/addItem/addItem";
+import { baseApi } from "../../configs/configs";
 
 export default function BlogList(){
     const [pageItem, setPageItem] = useState([]);
@@ -30,7 +31,7 @@ export default function BlogList(){
     function getPageItem(){
         axios({
             method: 'GET',
-            url: `http://localhost:8088/azclassics/blogs`
+            url: `${baseApi}/azclassics/blogs`
         })
         .then(response => {
             setPageItem(response.data)

@@ -4,6 +4,7 @@ import "./addItem.css";
 import axios from "axios";
 import { Formik, Form, Field, useFormik, FormikProps } from 'formik';
 import { nations, genres } from "../../nationAndGenres/nationGenreList";
+import { baseApi } from "../../../configs/configs";
 
 export default function AddItem({url,isRender}) {
 
@@ -28,7 +29,7 @@ export default function AddItem({url,isRender}) {
     if(urltype === 'item'){
       axios({
         method: 'POST',
-        url: `http://localhost:8088/azclassics/item`,
+        url: `${baseApi}/azclassics/item`,
         data:{
           author: author, piece: piece, born: born, nation: nation, genre: genre, url: url, description: description
         }
@@ -42,7 +43,7 @@ export default function AddItem({url,isRender}) {
     }else if(urltype === 'blogs'){
       axios({
         method: 'POST',
-        url: `http://localhost:8088/azclassics/blogs`,
+        url: `${baseApi}/azclassics/blogs`,
         data:{
           author: author, piece: piece, born: born, nation: nation, genre: genre, url: url, description: description
         }

@@ -6,6 +6,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { useDispatch, useSelector } from "react-redux";
 import { setAdminLogIn } from '../../store/features/loginValue/loginValue'
+import { baseApi } from "../../configs/configs";
 
 export default function AdminLoginPage(){
 
@@ -21,7 +22,7 @@ export default function AdminLoginPage(){
 
         axios({
             method: 'POST', 
-            url: 'http://localhost:8088/admin/login',
+            url: `${baseApi}/admin/login`,
             data: {
                 adminname: email, 
                 adminpassword: password

@@ -3,6 +3,7 @@ import './searchInput.css';
 import searchIcon from '../../assets/icons/generalicons/search-icon.png'
 import axios from "axios";
 import {Link} from "react-router-dom"
+import { baseApi } from "../../configs/configs";
 
 
 export default function SearchInput(){
@@ -14,7 +15,7 @@ export default function SearchInput(){
         if(searchText.length !== 0){
             axios({
                 method: "GET",
-                url: `http://localhost:8088/azclassics/book/search?q=${searchText}`
+                url: `${baseApi}/azclassics/book/search?q=${searchText}`
             }).then((response)=>
                 setResultArr(response.data)
             )

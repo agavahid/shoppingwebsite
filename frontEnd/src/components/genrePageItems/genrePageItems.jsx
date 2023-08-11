@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
-
+import { baseApi } from "../../configs/configs";
 export default function GenrePageItems({item}){
 
     const[isLiked, setIsLiked] = useState(false);
@@ -29,7 +29,7 @@ export default function GenrePageItems({item}){
             if(isLiked === true) {
                 axios({
                     method: 'DELETE',
-                    url: 'http://localhost:8088/login/shoppingcart',
+                    url: `${baseApi}/login/shoppingcart`,
                     data: {
                         itemid: itemid
                     },
@@ -40,7 +40,7 @@ export default function GenrePageItems({item}){
             }else{
                 axios({
                     method: 'PUT',
-                    url: 'http://localhost:8088/login/shoppingcart',
+                    url: `${baseApi}/login/shoppingcart`,
                     data: {
                         itemid: itemid
                     },

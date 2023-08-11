@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "./changeItem.css";
 import axios from "axios";
+import { baseApi } from "../../../configs/configs";
 
 export default function ChangeItem({url, id, isRender}) {
   const [modal, setModal] = useState(false);
@@ -16,7 +17,7 @@ export default function ChangeItem({url, id, isRender}) {
     if(url === 'item'){
       axios({
         method: 'GET',
-        url: `http://localhost:8088/azclassics/${url}/${id}`
+        url: `${baseApi}/azclassics/${url}/${id}`
       }).then(response => {
         isRender()
         setAuthorName(response.data[0].fullname);
@@ -27,7 +28,7 @@ export default function ChangeItem({url, id, isRender}) {
     }else if(url === 'blogs'){
       axios({
         method: 'GET',
-        url: `http://localhost:8088/azclassics/${url}/${id}`
+        url: `${baseApi}/azclassics/${url}/${id}`
       }).then(response => {
         isRender()
         setAuthorName(response.data[0].fullname);
@@ -52,7 +53,7 @@ export default function ChangeItem({url, id, isRender}) {
     if(url === 'item'){
       axios({
         method: 'PUT',
-        url: `http://localhost:8088/azclassics/item`,
+        url: `${baseApi}/azclassics/item`,
         data:{
             fullname: authorName, piece: pieceName, born: bornDate, url: imgUrl, id: id
         }
@@ -65,7 +66,7 @@ export default function ChangeItem({url, id, isRender}) {
     }else if(url === 'blogs'){
       axios({
         method: 'PUT',
-        url: `http://localhost:8088/azclassics/blogs`,
+        url: `${baseApi}/azclassics/blogs`,
         data:{
             fullname: authorName, piece: pieceName, born: bornDate, url: imgUrl, id: id
         }

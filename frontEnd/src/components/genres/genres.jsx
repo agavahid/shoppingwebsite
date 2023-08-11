@@ -3,15 +3,22 @@ import './genres.css';
 import arrowIconToDown from '../../assets/icons/generalicons/white-down-arrow.png';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { baseApi } from "../../configs/configs";
 
 
-export default function Genres({buttonClick}){
+export default function Genres({buttonClick, rightMenuActivity, setrightMenuActivity, isleftDrpMenuActive, }){
 
     const [isActive, setIsActive] = useState(false);
     const [pageItems, setPageItems] = useState([]);
 
-    function onClickHandler(key){
+   
+    function onClickHandler(e){
+        if(rightMenuActivity === true){
+            setrightMenuActivity(false)
+        }
+        e.stopPropagation()
         setIsActive(!isActive)
+        isleftDrpMenuActive()
     }
     function listItemOnClickHandler(){
         setIsActive(!isActive)
@@ -20,16 +27,26 @@ export default function Genres({buttonClick}){
     function getItems(){
         axios({
             method:'GET',
-            url:'http://localhost:8088/professions'
+            url:`${baseApi}/professions`
         }).then(response => setPageItems(response.data))
     }
     useEffect(()=>{
         getItems()
     }
     ,[])
-    
+    function closeMenu(){
+        if(isActive === true){
+            setIsActive(false)
+        }
+    }
+    document.addEventListener("click", closeMenu);
+    useEffect(()=>{
+        if(rightMenuActivity === true){
+            setIsActive(false)
+        }
+    },[rightMenuActivity])
     return(
-        <div className='genresMain' onClick={()=> {onClickHandler()}}>
+        <div className='genresMain' onClick={(e)=> onClickHandler(e)}>
             <div className='genresHeader'>
                 <h4>DISCOVER</h4>
             </div>

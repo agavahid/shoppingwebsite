@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Formik, Form, Field, useFormik } from 'formik';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { baseApi } from "../../configs/configs";
 
 
 export default function RegisterPage(){
@@ -14,7 +15,7 @@ export default function RegisterPage(){
          
         axios({
             method: 'POST', 
-            url: 'http://localhost:8088/register',
+            url: `${baseApi}/register`,
             data: {
                 username: username, 
                 password: password, 

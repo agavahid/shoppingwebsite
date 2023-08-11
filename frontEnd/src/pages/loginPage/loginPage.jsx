@@ -6,6 +6,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { useDispatch } from "react-redux";
 import { setLogin } from '../../store/features/loginValue/loginValue'
+import { baseApi } from "../../configs/configs";
 
 export default function LoginPage(){
 
@@ -20,7 +21,7 @@ export default function LoginPage(){
 
         axios({
             method: 'POST', 
-            url: 'http://localhost:8088/login',
+            url: `${baseApi}/login`,
             data: {
                 email: email, 
                 password: password

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import './genreCataloge.css';
 import axios from 'axios'
-
+import { baseApi } from "../../configs/configs";
 
 export default function GenreCataloge(){
 
@@ -12,7 +12,7 @@ export default function GenreCataloge(){
 
         axios({
             method: 'GET',
-            url: `http://localhost:8088/professions`
+            url: `${baseApi}/professions`
         })
         
         .then(response => {

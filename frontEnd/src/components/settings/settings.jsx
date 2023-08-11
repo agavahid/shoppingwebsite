@@ -9,6 +9,7 @@ import React, { useState, useEffect }  from 'react';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { baseApi } from '../../configs/configs';
 
 export default function Settings(){
     
@@ -22,7 +23,7 @@ export default function Settings(){
         
         axios({
             method: 'POST',
-            url: 'http://localhost:8088/user',
+            url: `${baseApi}/user`,
             headers: {"authorization" : `bearer ${token}`},
         })
             .then(response => {

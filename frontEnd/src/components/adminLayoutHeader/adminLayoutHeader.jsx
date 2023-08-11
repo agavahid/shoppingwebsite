@@ -7,7 +7,6 @@ import './adminLayoutHeader.css';
 
 import Cookies from 'universal-cookie';
 import { useState } from 'react';
-import axios from 'axios';
 import defaultProfilePic from '../../assets/icons/generalicons/default-user-icon.jpg';
 
 export default function AdminLayoutHeader(){

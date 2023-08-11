@@ -8,6 +8,7 @@ import formIcon from '../../assets/icons/generalicons/letterIcon.svg';
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { baseApi } from "../../configs/configs";
 
 export default function ItemPage(){
     
@@ -30,7 +31,7 @@ export default function ItemPage(){
         if(userToken !== undefined && userToken.length && userToken.length > 0){
             axios({
                 method: 'GET',
-                url: `http://localhost:8088/azclassics/item/${id}`,
+                url: `${baseApi}/azclassics/item/${id}`,
                 headers: {
                     "Authorization" : `bearer ${cookies.get('userToken')}`
                 }
@@ -49,7 +50,7 @@ export default function ItemPage(){
         else{
             axios({
                 method: 'GET',
-                url: `http://localhost:8088/azclassics/item/${id}`,
+                url: `${baseApi}/azclassics/item/${id}`,
             }).then((response) => { 
                 if(response.data[0] !== undefined){
                     getPageItems(response.data)
@@ -73,7 +74,7 @@ export default function ItemPage(){
             if(isSelected === true){
                 axios({
                     method: 'DELETE',
-                    url: 'http://localhost:8088/login/shoppingcart',
+                    url: `${baseApi}/login/shoppingcart`,
                     data: {
                         itemid: itemid
                     },
@@ -84,7 +85,7 @@ export default function ItemPage(){
             }else{
                 axios({
                     method: 'PUT',
-                    url: 'http://localhost:8088/login/shoppingcart',
+                    url: `${baseApi}/login/shoppingcart`,
                     data: {
                         itemid: itemid
                     },
@@ -99,7 +100,7 @@ export default function ItemPage(){
     function submitChanges(){
         axios({
             method: 'PUT',
-            url: `http://localhost:8088/azclassics/item`,
+            url: `${baseApi}/azclassics/item`,
             data:{
                 fullname: authorName, piece: pieceName, born: bornDate, url: imgUrl, id: pageItems[0].itemid
             }

@@ -5,6 +5,7 @@ import axios from "axios";
 import GenrePageItems from "../../components/genrePageItems/genrePageItems";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { baseApi } from "../../configs/configs";
 
 export default function GenrePage(){
     const { id } = useParams();
@@ -22,7 +23,7 @@ export default function GenrePage(){
         if(userToken !== undefined && userToken.length && userToken.length > 0){
             axios({
                 method: 'GET',
-                url: `http://localhost:8088/azclassics/genre/${id}`,
+                url: `${baseApi}/azclassics/genre/${id}`,
                 headers: {
                     "Authorization" : `bearer ${cookies.get('userToken')}`
                 }
@@ -34,7 +35,7 @@ export default function GenrePage(){
         else{
             axios({
                 method: 'GET',
-                url: `http://localhost:8088/azclassics/genre/${id}`
+                url: `${baseApi}/azclassics/genre/${id}`
             }).then((response) => {
                 setPageItems(response.data)
                 setItemLength(response.data.length)
@@ -51,7 +52,7 @@ export default function GenrePage(){
         getPageDatas()
         axios({
             method: 'get',
-            url: `http://localhost:8088/professions`
+            url: `${baseApi}/professions`
         })
             .then((response)=> {
                 for(let i in response.data){
@@ -63,7 +64,7 @@ export default function GenrePage(){
             })
         axios({
             method: 'POST',
-            url: 'http://localhost:8088/filter',
+            url: `${baseApi}/filter`,
         })
 
         

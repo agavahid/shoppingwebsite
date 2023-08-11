@@ -3,7 +3,7 @@ import './adminLayoutNav.css';
 import axios from "axios"; 
 import { Link } from "react-router-dom";
 import { adminNavBar } from "../adminNavItems/adminNavItems";
-
+import { baseApi } from "../../configs/configs";
 
 export default function AdminLayoutNav(){
     
@@ -14,20 +14,20 @@ export default function AdminLayoutNav(){
     function getUserCount(){
         axios({
             method: 'GET',
-            url: `http://localhost:8088/azclassics/users`
+            url: `${baseApi}/azclassics/users`
         }).then(response => setUserCount(response.data.length))
     }
     
     function getItemCount(){
         axios({
             method: 'GET',
-            url: `http://localhost:8088/azclassics`
+            url: `${baseApi}/azclassics`
         }).then(response => setItemCount(response.data.length))
     }
     function getBlogItemCount(){
         axios({
             method: 'GET',
-            url: `http://localhost:8088/azclassics/blogs`
+            url: `${baseApi}/azclassics/blogs`
         }).then(response => setBlogItemCount(response.data.length))
     }
     useEffect(()=>{

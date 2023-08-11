@@ -7,6 +7,7 @@ import Cookies from 'universal-cookie';
 import { useState } from 'react';
 import axios from 'axios';
 import defaultProfilePic from '../../assets/icons/generalicons/default-user-icon.jpg';
+import { baseApi } from "../../configs/configs";
 
 export default function UserProfileSideBar(){
 
@@ -19,7 +20,7 @@ export default function UserProfileSideBar(){
         
         axios({
             method: 'POST',
-            url: 'http://localhost:8088/user',
+            url: `${baseApi}/user`,
             headers: {"authorization" : `bearer ${token}`},
         })
             .then(response => {
